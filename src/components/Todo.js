@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const Li = styled.li`
-  text-decoration: ${(props) => (props.completed ? 'line-through' : 'none')};
-`;
+// const Li = styled.li`
+//   text-decoration: ${(props) => (props.completed ? 'line-through' : 'none')};
+// `;
 
 const Todo = ({ onClick, completed, text }) => (
-  <Li onClick={onClick} completed={completed}>
+  <li
+    onClick={onClick}
+    style={{
+      textDecoration: completed ? 'line-through' : 'none',
+    }}
+  >
     {text}
-  </Li>
+  </li>
 );
 
 Todo.propTypes = {

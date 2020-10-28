@@ -1,27 +1,31 @@
-import Enzyme, { mount, render, shallow } from 'enzyme';
-import Adpater from 'enzyme-adapter-react-16';
+import React from 'react';
+import { mount, shallow } from 'enzyme';
 
 import Todo from './Todo';
 
-Enzyme.configure({ adapter: new Adpater() });
-
 describe('Todo', () => {
   it('should render normal todo text if todo is not completed', () => {
-    const wrapper = shallow(
-      <Todo onClick={jest.fn()} completed={true} text={'todo text'} />
+    const wrapper = mount(
+      <Todo onClick={jest.fn()} completed={false} text={'todo text'} />
     );
 
     expect(wrapper.text()).toBe('todo text');
-    // expect(wrapper.getElement()).toHaveStyle('text-decoration:none');
+    expect(wrapper.find('li').prop('style')).toHaveProperty(
+      'textDecoration',
+      'none'
+    );
   });
 
   it('should render stroke line on todo text if todo is completed', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Todo onClick={jest.fn()} completed={true} text={'todo text'} />
     );
 
     expect(wrapper.text()).toBe('todo text');
-    // expect(wrapper.getElement()).toHaveProperty('text-decoration:line-through');
+    expect(wrapper.find('li').prop('style')).toHaveProperty(
+      'textDecoration',
+      'line-through'
+    );
   });
 
   it('should call onClick after clicking the todo', () => {
