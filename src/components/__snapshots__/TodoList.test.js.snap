@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList should match snapshot 1`] = `
+<ul>
+  <Todo
+    completed={true}
+    id={1}
+    key="1"
+    onClick={[MockFunction]}
+    text="Consider using Redux"
+  />
+  <Todo
+    completed={false}
+    id={2}
+    key="2"
+    onClick={[MockFunction]}
+    text="Keep all state in a single tree"
+  />
+</ul>
+`;
