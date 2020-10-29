@@ -1,5 +1,5 @@
-import actionsTypes from './actionsTypes';
-import actionTypes from './actionsTypes';
+import actionsTypes from '../constants/actionsTypes';
+import actionTypes from '../constants/actionsTypes';
 
 let nextTodoId = 0;
 
