@@ -20,7 +20,7 @@ describe('TodoList', () => {
   ];
 
   it('should match snapshot', () => {
-    const wrapper = shallow(<TodoList todos={todos} onTodoClick={jest.fn()} />);
+    const wrapper = shallow(<TodoList todos={todos} toggleTodo={jest.fn()} />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
   });
@@ -28,12 +28,25 @@ describe('TodoList', () => {
   it('should pass all required props to Todo', () => {
     const mockOnTodoClick = jest.fn();
     const wrapper = mount(
-      <TodoList todos={todos} onTodoClick={mockOnTodoClick} />
+      <TodoList todos={todos} toggleTodo={mockOnTodoClick} />
     );
 
-    expect(wrapper.find(Todo).first().props()).toStrictEqual({
-      ...todos[0],
-      onClick: mockOnTodoClick,
+    const props = wrapper.find(Todo).first().props();
+
+    expect(props).toHaveProperty('id', 1);
+    expect(props).toHaveProperty('completed', true);
+    expect(props).toHaveProperty('text', 'Consider using Redux');
+  });
+
+  it('should call togllTodo with todo id', () => {
+    const mockOnTodoClick = jest.fn((id) => {
+      expect(id).toBe(1);
     });
+
+    const wrapper = shallow(
+      <TodoList todos={todos} toggleTodo={mockOnTodoClick} />
+    );
+
+    wrapper.find(Todo).first().simulate('click');
   });
 });
